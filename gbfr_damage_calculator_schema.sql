@@ -1,44 +1,60 @@
 /* TODO: create all necessary tables for all existing data in our database. */
-CREATE TABLE IF NOT EXISTS characters
+CREATE TABLE IF NOT EXISTS public.characters
 (
-    character_name character varying(30) NOT NULL,
-    nickname character varying(30),
-    element character varying(20) NOT NULL,
-    character_roles character varying(20)[],
-    weapon_category character varying(20) NOT NULL,
-    lore_description text
+    character_name character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    element character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    nickname character varying(30) COLLATE pg_catalog."default",
+    va_jp character varying(30) COLLATE pg_catalog."default",
+    va_en character varying(30) COLLATE pg_catalog."default",
+    character_roles character varying(20)[] COLLATE pg_catalog."default",
+    weapon_category character varying(20) COLLATE pg_catalog."default",
+    lore_description text COLLATE pg_catalog."default",
+    CONSTRAINT characters_character_name_key UNIQUE (character_name)
 );
 
-CREATE TABLE IF NOT EXISTS combos
+CREATE TABLE IF NOT EXISTS public.combos
 (
-    "character" character varying(20) NOT NULL,
-    move_name character varying(30) NOT NULL,
-    modifier character varying(20),
-    damage_cap numeric(8,0) NOT NULL,
-    classifications character varying(20)[],
-    damage_ratio smallint[] NOT NULL
+    "character" character varying(20) COLLATE pg_catalog."default",
+    move_name character varying(30) COLLATE pg_catalog."default",
+    modifier character varying(20) COLLATE pg_catalog."default",
+    damage_cap numeric(8,0),
+    classifications character varying(20)[] COLLATE pg_catalog."default",
+    skill_ratio smallint[]
 );
 
-CREATE TABLE IF NOT EXISTS sigils
+CREATE TABLE IF NOT EXISTS public.over_masteries
 (
-    sigil_name character varying(30) NOT NULL,
-    sigil_type character varying(20) NOT NULL,
-    sigil_effect text COLLATE NOT NULL,
-    max_level SMALLINT NOT NULL,
+    attribute character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    "values" numeric[] NOT NULL,
+    CONSTRAINT over_masteries_attribute_key UNIQUE (attribute)
+);
+    
+CREATE TABLE IF NOT EXISTS public.sigils
+(
+    sigil_name character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    max_level integer NOT NULL,
     effect_per_level numeric[] NOT NULL,
-    CONSTRAINT sigils_sigil_name_key UNIQUE (sigil_name),
-    CONSTRAINT sigils_sigil_type_key UNIQUE (sigil_type)
+    sigil_color character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    effect text COLLATE pg_catalog."default",
+    CONSTRAINT sigils_sigil_name_key UNIQUE (sigil_name)
 );
 
-CREATE TABLE IF NOT EXISTS skills
+CREATE TABLE IF NOT EXISTS public.skills
 (
-    "character" character varying(20) NOT NULL,
-    skill_name character varying(30) NOT NULL,
-    skill_modifier character varying(20),
+    "character" character varying(20) COLLATE pg_catalog."default",
+    skill_name character varying(30) COLLATE pg_catalog."default",
+    skill_modifier character varying(20) COLLATE pg_catalog."default",
     skill_cooldown smallint,
-    damage_cap numeric(8,0) NOT NULL,
-    classifications character varying(20)[],
-    skill_ratio smallint[] NOT NULL
+    damage_cap numeric(8,0),
+    classifications character varying(20)[] COLLATE pg_catalog."default",
+    skill_ratio smallint[]
+);
+
+CREATE TABLE IF NOT EXISTS public.weapons
+(
+    weapon_name character varying(30) COLLATE pg_catalog."default",
+    weapon_user character varying(20) COLLATE pg_catalog."default",
+    weapon_type character varying(20) COLLATE pg_catalog."default"
 );
 
 
