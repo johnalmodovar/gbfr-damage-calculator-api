@@ -39,6 +39,13 @@ CREATE TABLE IF NOT EXISTS sigils
     CONSTRAINT sigils_sigil_name_key UNIQUE (sigil_name)
 );
 
+CREATE TABLE IF NOT EXISTS traits
+(
+    trait_name character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    max_level numeric(2,0) NOT NULL,
+    CONSTRAINT traits_trait_name_key UNIQUE (trait_name)
+)
+
 CREATE TABLE IF NOT EXISTS skills
 (
     "character" character varying(20) COLLATE pg_catalog."default",
