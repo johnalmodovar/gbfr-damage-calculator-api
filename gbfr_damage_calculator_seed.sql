@@ -130,4 +130,5 @@ VALUES (
 (	'HUANGLONG SPEAR',	'Zeta',	'executioner'	),
 (	'GISLA',	'Zeta',	'stinger'	),
 (	'SUNSPOT SPEAR',	'Zeta',	'stunner'	),
-(	'GAE BULG',	'Zeta',	'terminus'	),
+(	'GAE BULG',	'Zeta',	'terminus'	)
+)
